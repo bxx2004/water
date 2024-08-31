@@ -16,7 +16,10 @@ fun initWater(
     PacketSender.init()
     if (mode == Platform.SERVER){
         Server.initServer(Server(),port)
+    }else if (mode == Platform.CLIENT){
+        clientSender = ClientSender(name_client,uuid_client,host_client,port)
     }else{
+        Server.initServer(Server(),port)
         clientSender = ClientSender(name_client,uuid_client,host_client,port)
     }
 }

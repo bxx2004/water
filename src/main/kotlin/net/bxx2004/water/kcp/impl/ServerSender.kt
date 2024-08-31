@@ -1,14 +1,21 @@
 package net.bxx2004.water.kcp.impl
 
 import io.netty.buffer.Unpooled
+import kcp.Ukcp
 import net.bxx2004.water.Channel
 import net.bxx2004.water.PacketContext
 import net.bxx2004.water.PacketContextBreakPointSender
 import net.bxx2004.water.PacketSender
 import net.bxx2004.water.kcp.Client.Companion.channels
+import net.bxx2004.water.kcp.Server
 import java.util.UUID
 
 class ServerSender(val name: String, val uuid: UUID) : PacketSender {
+    init {
+        if (!Server.channels.containsKey(this)){
+            Server.channels.put(this, HashMap<Channel, Ukcp>())
+        }
+    }
     override fun sendPacket(
         channel: Channel,
         context: PacketContext,

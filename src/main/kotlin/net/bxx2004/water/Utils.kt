@@ -150,10 +150,10 @@ class PacketUtil {
 
 }
 
-class ResponseUtil(val spacket: PacketContext, val channel: Channel) {
+class ResponseUtil(val context: PacketContext, val channel: Channel) {
     fun response(func: (context: PacketContext) -> Unit): SendUtil {
         val it = PacketContext.empty()
-            .write("response_id", spacket.read<UUID>(XIdentifier("packet_info", "packet_id"))!!)
+            .write("response_id", context.read<UUID>(XIdentifier("packet_info", "packet_id"))!!)
         func(it)
         return SendUtil(it, channel)
     }

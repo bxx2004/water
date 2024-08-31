@@ -6,6 +6,7 @@ import kcp.ChannelConfig
 import kcp.KcpClient
 import kcp.Ukcp
 import net.bxx2004.water.Channel
+import net.bxx2004.water.clientSender
 import net.bxx2004.water.kcp.impl.ClientSender
 import java.net.InetSocketAddress
 
@@ -31,7 +32,7 @@ class Client {
             port = p
             return client
         }
-        fun addChannel(channel: Channel,listener: ClientSender): Ukcp{
+        fun addChannel(channel: Channel,listener: ClientSender = clientSender): Ukcp{
             val config = ChannelConfig()
             config.nodelay(true,40,2,true)
             config.sndwnd = 512
